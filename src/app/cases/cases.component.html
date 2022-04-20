@@ -22,6 +22,7 @@
           <th scope="col">Abogado</th>
           <th scope="col">Estado</th>
           <th scope="col">Fecha</th>
+          <th scope="col">Tipo</th>
           <th scope="col">Descripcion</th>
           <th scope="col">Opciones</th>
         </tr>
@@ -35,8 +36,9 @@
           <th scope="row">
             {{ case.Lawyer.FullName }}
           </th>
-          <th scope="row">{{ case.Status }}</th>
+          <th scope="row">{{ case.Status ? "Activo" : "Inactivo" }}</th>
           <th scope="row">{{ case.Date }}</th>
+          <th scope="row">{{ case.CaseType.Type }}</th>
           <th scope="row">{{ case.Description }}</th>
           <td scope="row">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -92,6 +94,7 @@
                 >Cliente:</label
               >
               <select class="form-select" (change)="changeClient($event)">
+                <option selected="true" disabled="disabled">Seleccione</option>
                 <option
                   *ngFor="let client of clientList"
                   value="{{ client.ClientID }}"
@@ -105,6 +108,8 @@
                 >Abogado:</label
               >
               <select class="form-select" (change)="changeLawyer($event)">
+                <option selected="true" disabled="disabled">Seleccione</option>
+
                 <option
                   *ngFor="let lawyer of lawyerList"
                   value="{{ lawyer.LawyerID }}"
@@ -113,12 +118,25 @@
                 </option>
               </select>
             </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Tipo:</label>
+              <select class="form-select" (change)="changeCaseType($event)">
+                <option selected="true" disabled="disabled">Seleccione</option>
 
+                <option
+                  *ngFor="let type of caseTypeList"
+                  value="{{ type.TypeID }}"
+                >
+                  {{ type.Type }}
+                </option>
+              </select>
+            </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Estado:</label>
               <select class="form-select" (change)="changeStatus($event)">
-                <option selected value="true">Activo</option>
-                <option value="false">Inactivo</option>
+                <option selected="true" disabled="disabled">Seleccione</option>
+                <option value="1">Activo</option>
+                <option value="0">Inactivo</option>
               </select>
             </div>
             <div class="form-group">

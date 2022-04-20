@@ -21,4 +21,24 @@ export class ClientsService {
       `${environment.API_URL}:${environment.API_URL_PORT}/clients/remove/${caseID}`
     );
   }
+
+  public saveOrUpdateCase(
+    clientToSave: IClient,
+    editMode: boolean
+  ): Observable<any> {
+    let observable: Observable<any>;
+
+    if (!editMode) {
+      observable = this.httpClient.post(
+        `${environment.API_URL}:${environment.API_URL_PORT}/clients/create`,
+        clientToSave
+      );
+    } else {
+      observable = this.httpClient.post(
+        `${environment.API_URL}:${environment.API_URL_PORT}/clients/update`,
+        clientToSave
+      );
+    }
+    return observable;
+  }
 }

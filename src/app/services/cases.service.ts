@@ -39,4 +39,11 @@ export class CasesService {
     }
     return observable;
   }
+
+  public filterCases(filters: any): Observable<any> {
+    return this.httpClient.post<any>(
+      `${environment.API_URL}:${environment.API_URL_PORT}/cases/filter/`,
+      filters
+    );
+  }
 }

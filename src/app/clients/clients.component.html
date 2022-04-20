@@ -34,8 +34,8 @@
           <th scope="row">{{ client.ClientID }}</th>
           <th scope="row">{{ client.Firstname }}</th>
           <th scope="row">{{ client.Lastname }}</th>
-          <th scope="row">{{ client.Phone }}</th>
           <th scope="row">{{ client.IdentificationID }}</th>
+          <th scope="row">{{ client.Phone }}</th>
           <th scope="row">{{ client.PhoneNumber }}</th>
           <th scope="row">{{ client.Email }}</th>
           <th scope="row">{{ client.MaritalStatusID }}</th>
@@ -47,14 +47,14 @@
                 class="btn btn-warning"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                (click)="ClickedClient(client)"
+                (click)="EditClient(client)"
               >
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
               <button
                 type="button"
                 class="btn btn-danger"
-                (click)="DeleteCase(client)"
+                (click)="DeleteClient(client)"
               >
                 <i class="fa-solid fa-trash-can"></i>
               </button>
@@ -90,24 +90,80 @@
           <form>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nombre:</label>
-              <input type="text" class="form-control" id="recipient-name" />
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.Firstname }}"
+                (change)="dllFirstnameChange($event)"
+              />
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Apellido:</label
               >
-              <input type="text" class="form-control" id="recipient-name" />
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.Lastname }}"
+                (change)="dllLastnameChange($event)"
+              />
             </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Cedula:</label>
-              <input type="text" class="form-control" id="recipient-name" />
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.IdentificationID }}"
+                (change)="dllIdentificationChange($event)"
+              />
             </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Telefono:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.Phone }}"
+                (change)="dllTelefonoChange($event)"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label"
+                >Celular:</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.PhoneNumber }}"
+                (change)="dllCelularChange($event)"
+              />
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">Email:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.Email }}"
+                (change)="dllEmailChange($event)"
+              />
+            </div>
+
             <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Estado civil:</label
               >
-              <select class="form-select">
-                <option selected value="1">Casado</option>
+              <select class="form-select" (change)="dllMaritalChange($event)">
+                <option selected="true" disabled="disabled">Seleccione</option>
+                <option value="1">Casado</option>
                 <option value="2">Soltero</option>
                 <option value="3">Viudo</option>
                 <option value="4">Union libre</option>
@@ -115,20 +171,16 @@
             </div>
 
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Fecha:</label>
-              <input type="text" class="form-control" id="recipient-name" />
-            </div>
-            <div class="form-group">
               <label for="recipient-name" class="col-form-label"
                 >Direccion:</label
               >
-              <input type="text" class="form-control" id="recipient-name" />
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Descripcion:</label
-              >
-              <textarea class="form-control" id="message-text"></textarea>
+              <input
+                type="text"
+                class="form-control"
+                id="recipient-name"
+                value="{{ selectedClient.Address }}"
+                (change)="dllAddressChange($event)"
+              />
             </div>
           </form>
         </div>

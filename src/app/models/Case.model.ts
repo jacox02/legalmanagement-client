@@ -1,3 +1,4 @@
+import { ICaseType } from './CaseType.model';
 import { IClient } from './Client.model';
 import { ILawyer } from './Lawyer.model';
 export interface ICase {
@@ -5,7 +6,7 @@ export interface ICase {
   Date: Date;
   Status: boolean;
   Description: string;
-  CaseTypeID: number;
+  CaseType: ICaseType | number | any;
   Lawyer: ILawyer | number | any;
   Client: IClient | number | any;
 }

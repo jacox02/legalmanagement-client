@@ -14,4 +14,29 @@ export class LawyersService {
       `${environment.API_URL}:${environment.API_URL_PORT}/lawyers/get/all`
     );
   }
+  public saveOrUpdateLawyer(
+    lawyerToSave: ILawyer,
+    editMode: boolean
+  ): Observable<any> {
+    let observable: Observable<any>;
+
+    if (!editMode) {
+      observable = this.httpClient.post(
+        `${environment.API_URL}:${environment.API_URL_PORT}/lawyers/create`,
+        lawyerToSave
+      );
+    } else {
+      observable = this.httpClient.post(
+        `${environment.API_URL}:${environment.API_URL_PORT}/lawyers/update`,
+        lawyerToSave
+      );
+    }
+    return observable;
+  }
+
+  public deleteLawyer(lawyerID: number): Observable<any> {
+    return this.httpClient.get<any>(
+      `${environment.API_URL}:${environment.API_URL_PORT}/lawyers/remove/${lawyerID}`
+    );
+  }
 }

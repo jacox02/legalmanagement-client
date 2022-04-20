@@ -11,6 +11,7 @@ export class ClientsComponent implements OnInit {
   constructor(private clientService: ClientsService) {}
   public clientList: IClient[] = [];
   public selectedClient!: IClient;
+
   public editMode: boolean = false;
 
   ngOnInit(): void {
@@ -34,10 +35,8 @@ export class ClientsComponent implements OnInit {
       this.clientList = response;
     });
   }
-  ClickedClient(client: IClient) {
-    console.log(client);
-  }
-  DeleteCase(clientSelected: IClient): void {
+
+  DeleteClient(clientSelected: IClient): void {
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,
@@ -60,7 +59,7 @@ export class ClientsComponent implements OnInit {
       this.GetAllClients();
     }, 5000);
   }
-  NewCase(): void {
+  NewClient(): void {
     this.editMode = false;
     this.selectedClient = {
       ClientID: 0,
@@ -74,7 +73,33 @@ export class ClientsComponent implements OnInit {
       MaritalStatusID: 1,
     };
   }
-  EditCase(clientSelected: IClient): void {
+
+  dllFirstnameChange(e: any): void {
+    this.selectedClient.Firstname = e.target.value;
+  }
+  dllLastnameChange(e: any): void {
+    this.selectedClient.Lastname = e.target.value;
+  }
+  dllIdentificationChange(e: any): void {
+    this.selectedClient.IdentificationID = e.target.value;
+  }
+  dllAddressChange(e: any): void {
+    this.selectedClient.Address = e.target.value;
+  }
+  dllMaritalChange(e: any): void {
+    this.selectedClient.MaritalStatusID = e.target.value;
+  }
+  dllTelefonoChange(e: any): void {
+    this.selectedClient.Phone = e.target.value;
+  }
+  dllCelularChange(e: any): void {
+    this.selectedClient.PhoneNumber = e.target.value;
+  }
+  dllEmailChange(e: any): void {
+    this.selectedClient.Email = e.target.value;
+  }
+
+  EditClient(clientSelected: IClient): void {
     this.editMode = true;
     this.selectedClient = {
       ClientID: clientSelected.ClientID,
@@ -90,8 +115,32 @@ export class ClientsComponent implements OnInit {
   }
   SaveUpdate() {
     this.GetAllClients();
+
+    this.clientService
+      .saveOrUpdateCase(this.selectedClient, this.editMode)
+      .subscribe((response) => {
+        Swal.fire({
+          icon: 'success',
+          title: response.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+
+    this.selectedClient = {
+      ClientID: 0,
+      Firstname: '',
+      Lastname: '',
+      Email: '',
+      PhoneNumber: '',
+      IdentificationID: '',
+      Phone: '',
+      Address: '',
+      MaritalStatusID: 1,
+    };
   }
   CloseModal(): void {
+    this.GetAllClients();
     this.selectedClient = {
       ClientID: 0,
       Firstname: '',
