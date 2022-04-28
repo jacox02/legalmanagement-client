@@ -1,6 +1,6 @@
 import { ICaseType } from './CaseType.model';
 import { IClient } from './Client.model';
-import { ILawyer } from './Lawyer.model';
+import { IFood } from './Food.model';
 export interface IFilter {
   CaseType: number;
   Lawyer: number;

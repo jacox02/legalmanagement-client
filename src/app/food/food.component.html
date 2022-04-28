@@ -1,6 +1,6 @@
 <div>
   <div class="d-flex justify-content-between">
-    <h1>Abogados</h1>
+    <h1>Platos disponibles</h1>
     <div>
       <button
         type="button"
@@ -18,15 +18,17 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Especialidad</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Descripcion</th>
           <th scope="col">Opciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lawyer of lawyersList">
-          <th scope="row">{{ lawyer.LawyerID }}</th>
-          <td scope="row">{{ lawyer.FullName }}</td>
-          <td scope="row">{{ lawyer.Speciality }}</td>
+        <tr *ngFor="let food of foodList">
+          <th scope="row">{{ food.FoodID }}</th>
+          <td scope="row">{{ food.FoodName }}</td>
+          <td scope="row">{{ food.Price }}</td>
+          <td scope="row">{{ food.Description }}</td>
           <td scope="row">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button
@@ -34,14 +36,14 @@
                 class="btn btn-warning"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                (click)="EditCase(lawyer)"
+                (click)="EditFood(food)"
               >
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
               <button
                 type="button"
                 class="btn btn-danger"
-                (click)="DeleteCase(lawyer)"
+                (click)="DeleteFood(food)"
               >
                 <i class="fa-solid fa-trash-can"></i>
               </button>
@@ -63,7 +65,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Agregar/Editar abogado
+            Agregar/Editar plato
           </h5>
           <button
             type="button"
@@ -76,28 +78,24 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Nombre completo:</label
-              >
+              <label for="recipient-name" class="col-form-label">Nombre:</label>
               <input
                 type="text"
                 class="form-control"
                 id="recipient-name"
-                value="{{ selectedLawyer.FullName }}"
-                (change)="txtChangeName($event)"
+                value="{{ selectedFood.FoodName }}"
+                (change)="txtChangeFoodName($event)"
               />
             </div>
 
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Especialidad:</label
-              >
+              <label for="recipient-name" class="col-form-label">Precio:</label>
               <input
                 type="text"
                 class="form-control"
                 id="recipient-name"
-                value="{{ selectedLawyer.Speciality }}"
-                (change)="txtChangeSpecility($event)"
+                value="{{ selectedFood.Price }}"
+                (change)="txtChangeoPrice($event)"
               />
             </div>
           </form>

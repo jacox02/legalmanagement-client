@@ -1,12 +1,13 @@
 import { ICaseType } from './CaseType.model';
 import { IClient } from './Client.model';
-import { ILawyer } from './Lawyer.model';
-export interface ICase {
-  CaseID: number;
+import { IFood } from './Food.model';
+
+export interface IOrder {
+  OrderID: number;
   Date: Date;
   Status: boolean;
   Description: string;
-  CaseType: ICaseType | number | any;
-  Lawyer: ILawyer | number | any;
+  Address: string;
+  Food: IFood | number | any;
   Client: IClient | number | any;
 }

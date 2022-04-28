@@ -35,7 +35,7 @@
     "@angular-devkit/build-angular": "~13.3.3",
     "@angular/cli": "~13.3.3",
     "@angular/compiler-cli": "~13.3.0",
-    "@faker-js/faker": "^6.1.2",
+    "@faker-js/faker": "^6.2.0",
     "@types/jasmine": "~3.10.0",
     "@types/jquery": "^3.5.14",
     "@types/node": "^12.11.1",

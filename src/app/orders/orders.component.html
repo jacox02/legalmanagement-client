@@ -1,6 +1,6 @@
 <div>
   <div class="d-flex justify-content-between">
-    <h1>Casos</h1>
+    <h1>Ordenes</h1>
     <div>
       <button
         type="button"
@@ -19,27 +19,23 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Cliente</th>
-          <th scope="col">Abogado</th>
+          <th scope="col">Comida</th>
           <th scope="col">Estado</th>
           <th scope="col">Fecha</th>
-          <th scope="col">Tipo</th>
-          <th scope="col">Descripcion</th>
+          <th scope="col">Direccion</th>
           <th scope="col">Opciones</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let case of casesList">
-          <th scope="row">{{ case.CaseID }}</th>
+        <tr *ngFor="let order of ordersList">
+          <th scope="row">{{ order.OrderID }}</th>
+          <th scope="row">{{ order.Client }}</th>
           <th scope="row">
-            {{ case.Client.Firstname }} {{ case.Client.Lastname }}
+            {{ order.Food }}
           </th>
-          <th scope="row">
-            {{ case.Lawyer.FullName }}
-          </th>
-          <th scope="row">{{ case.Status ? "Activo" : "Inactivo" }}</th>
-          <th scope="row">{{ case.Date }}</th>
-          <th scope="row">{{ case.CaseType.Type }}</th>
-          <th scope="row">{{ case.Description }}</th>
+          <th scope="row">{{ order.Status ? "Activo" : "Inactivo" }}</th>
+          <th scope="row">{{ order.Date }}</th>
+          <th scope="row">{{ order.Address }}</th>
           <td scope="row">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button
@@ -47,14 +43,14 @@
                 class="btn btn-warning"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                (click)="EditCase(case)"
+                (click)="EditCase(order)"
               >
                 <i class="fa-solid fa-pen-to-square"></i>
               </button>
               <button
                 type="button"
                 class="btn btn-danger"
-                (click)="DeleteCase(case)"
+                (click)="DeleteCase(order)"
               >
                 <i class="fa-solid fa-trash-can"></i>
               </button>
@@ -71,7 +67,7 @@
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
-    *ngIf="selectedCase"
+    *ngIf="selectedOrder"
   >
     <div class="modal-dialog">
       <div class="modal-content">
@@ -104,33 +100,16 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Abogado:</label
-              >
+              <label for="recipient-name" class="col-form-label">Comida:</label>
               <select class="form-select" (change)="changeLawyer($event)">
                 <option selected="true" disabled="disabled">Seleccione</option>
 
-                <option
-                  *ngFor="let lawyer of lawyerList"
-                  value="{{ lawyer.LawyerID }}"
-                >
-                  {{ lawyer.FullName }}
+                <option *ngFor="let food of foodList" value="{{ food.FoodID }}">
+                  {{ food.FoodName }}
                 </option>
               </select>
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Tipo:</label>
-              <select class="form-select" (change)="changeCaseType($event)">
-                <option selected="true" disabled="disabled">Seleccione</option>
 
-                <option
-                  *ngFor="let type of caseTypeList"
-                  value="{{ type.TypeID }}"
-                >
-                  {{ type.Type }}
-                </option>
-              </select>
-            </div>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Estado:</label>
               <select class="form-select" (change)="changeStatus($event)">
@@ -145,7 +124,7 @@
                 type="date"
                 class="form-control"
                 id="recipient-name"
-                value="{{ selectedCase.Date }}"
+                value="{{ selectedOrder.Date }}"
               />
             </div>
             <div class="form-group">
@@ -156,7 +135,7 @@
                 class="form-control"
                 id="message-text"
                 (change)="changeDescription($event)"
-                value="{{ selectedCase.Description }}"
+                value="{{ selectedOrder.Description }}"
               ></textarea>
             </div>
           </form>

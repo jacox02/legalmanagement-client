@@ -24,7 +24,6 @@
           <th scope="col">Telefono</th>
           <th scope="col">Celular</th>
           <th scope="col">Correo</th>
-          <th scope="col">Estado Civil</th>
           <th scope="col">Direccion</th>
           <th scope="col">Opciones</th>
         </tr>
@@ -38,7 +37,6 @@
           <th scope="row">{{ client.Phone }}</th>
           <th scope="row">{{ client.PhoneNumber }}</th>
           <th scope="row">{{ client.Email }}</th>
-          <th scope="row">{{ client.MaritalStatusID }}</th>
           <th scope="row">{{ client.Address }}</th>
           <td scope="row">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -155,19 +153,6 @@
                 value="{{ selectedClient.Email }}"
                 (change)="dllEmailChange($event)"
               />
-            </div>
-
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label"
-                >Estado civil:</label
-              >
-              <select class="form-select" (change)="dllMaritalChange($event)">
-                <option selected="true" disabled="disabled">Seleccione</option>
-                <option value="1">Casado</option>
-                <option value="2">Soltero</option>
-                <option value="3">Viudo</option>
-                <option value="4">Union libre</option>
-              </select>
             </div>
 
             <div class="form-group">

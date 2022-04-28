@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IClient } from '../models/Client.model';
 import { ClientsService } from '../services/clients.service';
 import Swal from 'sweetalert2';
-
+import { faker } from '@faker-js/faker';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
@@ -15,7 +15,8 @@ export class ClientsComponent implements OnInit {
   public editMode: boolean = false;
 
   ngOnInit(): void {
-    this.GetAllClients();
+    // this.GetAllClients();
+    let maxData: number = 34;
 
     this.selectedClient = {
       ClientID: 0,
@@ -28,6 +29,20 @@ export class ClientsComponent implements OnInit {
       Address: '',
       MaritalStatusID: 1,
     };
+
+    for (let i = 0; i < maxData; i++) {
+      this.clientList.push({
+        ClientID: i,
+        Firstname: faker.name.findName(),
+        Lastname: faker.name.lastName(),
+        Email: faker.internet.email(),
+        PhoneNumber: faker.phone.phoneNumber('+(829)-###-####'),
+        IdentificationID: faker.phone.phoneNumber('###-#######-#'),
+        Phone: faker.phone.phoneNumber('+(809)-###-####'),
+        Address: `${faker.address.streetAddress()}, ${faker.address.state()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`,
+        MaritalStatusID: 1,
+      });
+    }
   }
 
   GetAllClients() {
